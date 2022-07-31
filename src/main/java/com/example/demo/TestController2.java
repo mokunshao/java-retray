@@ -1,8 +1,11 @@
 package com.example.demo;
 
+import ch.qos.logback.core.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class TestController2 {
@@ -25,10 +28,15 @@ public class TestController2 {
             } catch (Exception e) {
                 times++;
                 try {
-                    Thread.sleep(1000);
+                    TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
+//                try {
+//                    Thread.sleep(1000);
+//                } catch (InterruptedException ex) {
+//                    throw new RuntimeException(ex);
+//                }
 //                if (times >= RETRY_MAX_TIMES) {
 //                    return "没有结果";
 //                }
