@@ -24,6 +24,11 @@ public class TestController2 {
                 return innerCall();
             } catch (Exception e) {
                 times++;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
 //                if (times >= RETRY_MAX_TIMES) {
 //                    return "没有结果";
 //                }
