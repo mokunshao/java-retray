@@ -1,12 +1,9 @@
 package com.example.demo.another;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Demo {
+public class Demo2 {
 
     public static void main(String[] args) {
 
@@ -35,6 +32,8 @@ public class Demo {
                 count++;
                 if (husband.getFamilyId().equals(wife.getFamilyId())) {
                     System.out.println(husband.getUserName() + "爱" + wife.getUserName());
+                    // 牵手成功，换下一位男嘉宾
+                    break;
                 }
             }
         }
@@ -43,3 +42,4 @@ public class Demo {
         System.out.println("循环了：" + count + "次");
     }
 }
+
