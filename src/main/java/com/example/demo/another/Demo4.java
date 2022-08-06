@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Demo4 {
 
@@ -46,6 +47,16 @@ public class Demo4 {
 
         System.out.println("----------------------");
         System.out.println("循环了：" + count + "次");
+
+
+        String collect = husbands.stream()
+                .flatMap(husband -> wives
+                        .stream()
+                        .filter(wife ->
+                                husband.getFamilyId().equals(wife.getFamilyId()))
+                        .map(wife -> husband.getUserName() + "爱" + wife.getUserName())
+                )
+                .collect(Collectors.joining("\r\n"));
+        System.out.println(collect);
     }
 }
-
