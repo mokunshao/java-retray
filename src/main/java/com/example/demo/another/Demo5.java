@@ -6,12 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Demo4 {
+public class Demo5 {
 
     public static void main(String[] args) {
-
-        // 用于计算循环次数
-        int count = 0;
 
         // 老公组
         List<Couple> husbands = new ArrayList<>();
@@ -29,23 +26,14 @@ public class Demo4 {
         wives.add(new Couple(4, "毛利兰"));
         wives.add(new Couple(5, "朱丽叶"));
 
-        // 给女嘉宾发牌子
-        Map<Integer, Couple> wivesMap = new HashMap<>();
-        for (Couple wife : wives) {
-            // 女嘉宾现在不在List里了，而是去了wivesMap中，前面放了一块牌子：男嘉宾的号码
-            wivesMap.put(wife.getFamilyId(), wife);
-            count++;
-        }
-
-        // 男嘉宾上场
-        for (Couple husband : husbands) {
-            // 找到举着自己号码牌的女嘉宾
-            Couple wife = wivesMap.get(husband.getFamilyId());
-            System.out.println(husband.getUserName() + "爱" + wife.getUserName());
-            count++;
-        }
-
-        System.out.println("----------------------");
-        System.out.println("循环了：" + count + "次");
+        String collect = husbands.stream()
+                .flatMap(husband -> wives
+                        .stream()
+                        .filter(wife ->
+                                husband.getFamilyId().equals(wife.getFamilyId()))
+                        .map(wife -> husband.getUserName() + "爱" + wife.getUserName())
+                )
+                .collect(Collectors.joining("\r\n"));
+        System.out.println(collect);
     }
 }
