@@ -90,6 +90,33 @@ public class ConvertUtil {
     }
 
     /**
+     * 将List转为Map，同时支持自定义key和value
+     *
+     * @param list           原数据
+     * @param keyExtractor   Key的抽取规则
+     * @param valueExtractor Value的抽取规则
+     * @param <K>            Key
+     * @param <V>            Value
+     * @param <R>            NewValue
+     * @return
+     */
+    public static <K, V, R> Map<K, R> listToMapKV(List<V> list, Function<V, K> keyExtractor, Function<V, R> valueExtractor) {
+        if (list == null || list.isEmpty()) {
+            return new HashMap<>();
+        }
+        Map<K, R> map = new HashMap<>(list.size());
+        for (V element : list) {
+            K key = keyExtractor.apply(element);
+            if (key == null) {
+                continue;
+            }
+            // 改进：和key一样，对value使用valueExtractor进行抽取
+            map.put(key, valueExtractor.apply(element));
+        }
+        return map;
+    }
+
+    /**
      * 将List映射为List，比如List<Person> personList转为List<String> nameList
      * 可以指定过滤规则
      *
