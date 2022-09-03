@@ -33,9 +33,7 @@ public class MergeDemo {
         list.add(job4);
         list.add(job5);
         Map<String, Integer> treeMap = new HashMap<>();
-        list.forEach(jobs -> {
-            treeMap.merge(jobs.getName(), jobs.getScore(), Integer::sum);
-        });
+        list.forEach(jobs -> treeMap.merge(jobs.getName(), jobs.getScore(), Integer::sum));
 
         System.out.println("触发信息内容：" + treeMap);
     }
