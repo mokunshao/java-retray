@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.zero;
 
 public class TestProcessesWait {
     private static final Object monitor = new Object();
