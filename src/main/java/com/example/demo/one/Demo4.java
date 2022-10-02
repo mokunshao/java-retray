@@ -1,9 +1,11 @@
-package com.example.demo.another;
+package com.example.demo.one;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Demo3 {
+public class Demo4 {
 
     public static void main(String[] args) {
 
@@ -26,21 +28,23 @@ public class Demo3 {
         wives.add(new Couple(4, "毛利兰"));
         wives.add(new Couple(5, "朱丽叶"));
 
+        // 给女嘉宾发牌子
+        Map<Integer, Couple> wivesMap = new HashMap<>();
+        for (Couple wife : wives) {
+            // 女嘉宾现在不在List里了，而是去了wivesMap中，前面放了一块牌子：男嘉宾的号码
+            wivesMap.put(wife.getFamilyId(), wife);
+            count++;
+        }
+
+        // 男嘉宾上场
         for (Couple husband : husbands) {
-            for (Couple wife : wives) {
-                // 记录循环的次数
-                count++;
-                if (husband.getFamilyId().equals(wife.getFamilyId())) {
-                    System.out.println(husband.getUserName() + "爱" + wife.getUserName());
-                    // 牵手成功，把女嘉宾从舞台请下来，同时换下一位男嘉宾上场
-                    wives.remove(wife);
-                    break;
-                }
-            }
+            // 找到举着自己号码牌的女嘉宾
+            Couple wife = wivesMap.get(husband.getFamilyId());
+            System.out.println(husband.getUserName() + "爱" + wife.getUserName());
+            count++;
         }
 
         System.out.println("----------------------");
         System.out.println("循环了：" + count + "次");
     }
 }
-

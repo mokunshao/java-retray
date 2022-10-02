@@ -1,14 +1,12 @@
-package com.example.demo.another;
+package com.example.demo.one;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class Demo2 {
+public class Demo5 {
 
     public static void main(String[] args) {
-
-        // 用于计算循环次数
-        int count = 0;
 
         // 老公组
         List<Couple> husbands = new ArrayList<>();
@@ -26,20 +24,14 @@ public class Demo2 {
         wives.add(new Couple(4, "毛利兰"));
         wives.add(new Couple(5, "朱丽叶"));
 
-        for (Couple husband : husbands) {
-            for (Couple wife : wives) {
-                // 记录循环的次数
-                count++;
-                if (husband.getFamilyId().equals(wife.getFamilyId())) {
-                    System.out.println(husband.getUserName() + "爱" + wife.getUserName());
-                    // 牵手成功，换下一位男嘉宾
-                    break;
-                }
-            }
-        }
-
-        System.out.println("----------------------");
-        System.out.println("循环了：" + count + "次");
+        String collect = husbands.stream()
+                .flatMap(husband -> wives
+                        .stream()
+                        .filter(wife ->
+                                husband.getFamilyId().equals(wife.getFamilyId()))
+                        .map(wife -> husband.getUserName() + "爱" + wife.getUserName())
+                )
+                .collect(Collectors.joining("\r\n"));
+        System.out.println(collect);
     }
 }
-
