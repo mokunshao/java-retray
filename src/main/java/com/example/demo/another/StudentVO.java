@@ -16,4 +16,6 @@ public class StudentVO {
     private Double height;
     private String birthday;
     private String course;
+    private String comment;
+
 }

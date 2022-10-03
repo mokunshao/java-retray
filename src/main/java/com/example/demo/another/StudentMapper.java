@@ -30,6 +30,7 @@ public interface StudentMapper {
 
     @Mapping(source = "gender.name", target = "gender")
     @Mapping(source = "birthday", target = "birthday", dateFormat = "yyyy-MM-dd HH:mm:ss")
+    @Mapping(source = "comment", target = "comment", defaultValue = "xxx")
     StudentVO student2StudentVO(Student student);
 
 
